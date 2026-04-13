@@ -1,4 +1,4 @@
-const API_BASE = "http://localhost:5000/api";
+const API_BASE = process.env.REACT_APP_API_URL || "https://english-coach-hzqo.onrender.com/api";
 
 export async function sendMessage(input, userId = "gf_1") {
   const response = await fetch(`${API_BASE}/ai`, {
