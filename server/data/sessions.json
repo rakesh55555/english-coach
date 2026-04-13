@@ -1,0 +1,210 @@
+[
+  {
+    "id": "1776003250677",
+    "userId": "gf_1",
+    "input": "hello",
+    "response": {
+      "corrected": "Hello.",
+      "explanation": "Always start with a capital letter and end with a period in a sentence.",
+      "translation": "ନମସ୍କାର।",
+      "nextQuestion": "How are you?",
+      "hadErrors": true
+    },
+    "score": 80,
+    "date": "2026-04-12T14:14:10.677Z"
+  },
+  {
+    "id": "1776003273949",
+    "userId": "gf_1",
+    "input": "I are happy",
+    "response": {
+      "corrected": "I am happy.",
+      "explanation": "We use 'am' with 'I', not 'are'.",
+      "translation": "ମୁଁ ଖୁସି।",
+      "nextQuestion": "Please say: I like cats.",
+      "hadErrors": true
+    },
+    "score": 80,
+    "date": "2026-04-12T14:14:33.949Z"
+  },
+  {
+    "id": "1776003337991",
+    "userId": "gf_1",
+    "input": "hi",
+    "response": {
+      "corrected": "Hi",
+      "explanation": "In English, we can just say 'Hi' with a capital 'H'.",
+      "translation": "ହାଇ",
+      "nextQuestion": "How are you?",
+      "hadErrors": true
+    },
+    "score": 80,
+    "date": "2026-04-12T14:15:37.991Z"
+  },
+  {
+    "id": "1776003354217",
+    "userId": "gf_1",
+    "input": "how are you ?",
+    "response": {
+      "corrected": "How are you?",
+      "explanation": "The sentence should start with a capital letter and have a question mark at the end.",
+      "translation": "ତୁମେ କେମିତି ଅଛ?",
+      "nextQuestion": "What is your name?",
+      "hadErrors": true
+    },
+    "score": 80,
+    "date": "2026-04-12T14:15:54.217Z"
+  },
+  {
+    "id": "1776004203978",
+    "userId": "gf_1",
+    "input": "hi",
+    "response": {
+      "corrected": "Hi",
+      "explanation": "Just a small correction: 'hi' should be capitalized at the start.",
+      "translation": "ନମସ୍କାର",
+      "nextQuestion": "Can you say, 'I am learning Odia.'?",
+      "hadErrors": true
+    },
+    "score": 80,
+    "date": "2026-04-12T14:30:03.978Z"
+  },
+  {
+    "id": "1776004700516",
+    "userId": "gf_1",
+    "input": "[CONVERSATION] What would you like to achieve in the next year?",
+    "response": {
+      "userAnswer": "I want to learn fluent english",
+      "feedback": "Great answer! It's clear and shows your goal.",
+      "corrections": "I want to learn fluent English."
+    },
+    "score": 85,
+    "date": "2026-04-12T14:38:20.516Z"
+  },
+  {
+    "id": "1776090256705",
+    "userId": "gf_1",
+    "input": "[CONVERSATION] What is your name?",
+    "response": {
+      "userAnswer": "My name is Rakesh",
+      "feedback": "Great job! Your answer is clear and direct.",
+      "corrections": null
+    },
+    "score": 100,
+    "date": "2026-04-13T14:24:16.705Z"
+  },
+  {
+    "id": "1776090290893",
+    "userId": "gf_1",
+    "input": "[CONVERSATION] What would you like to achieve in the next year?",
+    "response": {
+      "userAnswer": "hi",
+      "feedback": "It's great that you are starting the conversation!",
+      "corrections": "Your answer should be a complete sentence."
+    },
+    "score": 10,
+    "date": "2026-04-13T14:24:50.893Z"
+  },
+  {
+    "id": "1776090467758",
+    "userId": "gf_1",
+    "input": "[CONVERSATION] What is your name?",
+    "response": {
+      "userAnswer": "My name is Rakesh",
+      "feedback": "Great job! You answered clearly and correctly.",
+      "corrections": null
+    },
+    "score": 100,
+    "date": "2026-04-13T14:27:47.758Z"
+  },
+  {
+    "id": "1776090539857",
+    "userId": "gf_1",
+    "input": "I am going to the school",
+    "response": {
+      "corrected": "I am going to school.",
+      "explanation": "We don't usually say 'the school' when talking about going to school for learning.",
+      "translation": "ମୁଁ ବିଦ୍ୟାଳୟକୁ ଯାଉଛି।",
+      "nextQuestion": "What do you like to study?",
+      "hadErrors": true
+    },
+    "score": 80,
+    "date": "2026-04-13T14:28:59.857Z"
+  },
+  {
+    "id": "1776090726624",
+    "userId": "gf_1",
+    "input": "[CONVERSATION] What do you do for work?",
+    "response": {
+      "userAnswer": "i can speak english",
+      "feedback": "That's great that you can speak English! It's an important skill.",
+      "corrections": "Change 'i' to 'I'."
+    },
+    "score": 60,
+    "date": "2026-04-13T14:32:06.624Z"
+  },
+  {
+    "id": "1776090745550",
+    "userId": "gf_1",
+    "input": "[CONVERSATION] How are you?",
+    "response": {
+      "userAnswer": "I am good",
+      "feedback": "Great job! Your answer is clear and correct.",
+      "corrections": null
+    },
+    "score": 90,
+    "date": "2026-04-13T14:32:25.550Z"
+  },
+  {
+    "id": "1776090764424",
+    "userId": "gf_1",
+    "input": "[CONVERSATION] Where do you live?",
+    "response": {
+      "userAnswer": "I live in city",
+      "feedback": "Good job! You answered the question clearly.",
+      "corrections": "I live in the city."
+    },
+    "score": 70,
+    "date": "2026-04-13T14:32:44.424Z"
+  },
+  {
+    "id": "1776090870277",
+    "userId": "gf_1",
+    "input": "hi",
+    "response": {
+      "corrected": "Hi",
+      "explanation": "The greeting is correct, but it should start with a capital letter.",
+      "translation": "ନମସ୍କାର",
+      "nextQuestion": "How are you?",
+      "hadErrors": true
+    },
+    "score": 80,
+    "date": "2026-04-13T14:34:30.277Z"
+  },
+  {
+    "id": "1776090885208",
+    "userId": "gf_1",
+    "input": "How are you ?",
+    "response": {
+      "corrected": "How are you?",
+      "explanation": "Your sentence is almost perfect! Just remember to use one space before the question mark.",
+      "translation": "ତୁମେ କେମିତି ଅଛ? ",
+      "nextQuestion": "What is your name?",
+      "hadErrors": true
+    },
+    "score": 80,
+    "date": "2026-04-13T14:34:45.208Z"
+  },
+  {
+    "id": "1776090907677",
+    "userId": "gf_1",
+    "input": "[CONVERSATION] Tell me about your favorite place to visit.",
+    "response": {
+      "userAnswer": "Puri jagannath temple",
+      "feedback": "Great job mentioning a specific place! It's important to share details.",
+      "corrections": "You can say, 'My favorite place to visit is Puri Jagannath Temple.'"
+    },
+    "score": 60,
+    "date": "2026-04-13T14:35:07.677Z"
+  }
+]
