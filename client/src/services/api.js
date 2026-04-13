@@ -1,4 +1,4 @@
-const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+const API_BASE = import.meta.env.VITE_API_URL || "/api";
 
 export async function sendMessage(input, userId = "gf_1") {
   const response = await fetch(`${API_BASE}/ai`, {
