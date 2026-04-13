@@ -36,6 +36,7 @@ const readButtonStyle = {
 export default function ConversationModeEnhanced() {
   const [greeting, setGreeting] = useState("");
   const [currentQuestion, setCurrentQuestion] = useState("");
+  const [currentQuestionOdia, setCurrentQuestionOdia] = useState("");
   const [userAnswer, setUserAnswer] = useState("");
   const [loading, setLoading] = useState(true);
   const [answering, setAnswering] = useState(false);
@@ -61,6 +62,7 @@ export default function ConversationModeEnhanced() {
         const data = await startConversation("gf_1");
         setGreeting(data.greeting);
         setCurrentQuestion(data.question);
+        setCurrentQuestionOdia(data.questionOdia || data.question);
         setStats({
           level: data.userLevel,
           accuracy: data.accuracy,
@@ -110,6 +112,7 @@ export default function ConversationModeEnhanced() {
 
       setScore(data.score);
       setCurrentQuestion(data.nextQuestion);
+      setCurrentQuestionOdia(data.nextQuestionOdia || data.nextQuestion);
       setUserAnswer("");
       setStats(data.stats);
     } catch (err) {
@@ -185,7 +188,7 @@ export default function ConversationModeEnhanced() {
                     </div>
                   )}
                   {item.explanationOdia && (
-                    <div style={panelStyleOdia}>
+                    <div style={{ ...panelStyleOdia, marginTop: "0.75rem" }} className="odia-panel">
                       <strong>ଉଡ଼ିଆ:</strong> {item.explanationOdia}
                       {speechSupported && (
                         <button
@@ -230,15 +233,32 @@ export default function ConversationModeEnhanced() {
             <div className="message-avatar">AI</div>
             <div className="message-content">
               <p className="question">{currentQuestion}</p>
+              {currentQuestionOdia && currentQuestionOdia !== currentQuestion && (
+                <div style={{ ...panelStyleOdia, marginTop: "0.75rem" }} className="odia-panel">
+                  <strong>ଓଡ଼ିଆ:</strong> {currentQuestionOdia}
+                </div>
+              )}
               {speechSupported && (
-                <button
-                  type="button"
-                  style={{ ...readButtonStyle, marginTop: "0.75rem" }}
-                  onClick={() => speakText(currentQuestion)}
-                  title="Read question aloud"
-                >
-                  🔊 Read Question
-                </button>
+                <>
+                  <button
+                    type="button"
+                    style={{ ...readButtonStyle, marginTop: "0.75rem" }}
+                    onClick={() => speakText(currentQuestion)}
+                    title="Read question aloud"
+                  >
+                    🔊 Read Question
+                  </button>
+                  {currentQuestionOdia && currentQuestionOdia !== currentQuestion && (
+                    <button
+                      type="button"
+                      style={{ ...readButtonStyle, marginLeft: "0.5rem" }}
+                      onClick={() => speakText(currentQuestionOdia)}
+                      title="Read Odia question aloud"
+                    >
+                      🔊 ଓଡ଼ିଆ
+                    </button>
+                  )}
+                </>
               )}
             </div>
           </div>
@@ -267,16 +287,24 @@ export default function ConversationModeEnhanced() {
           value={userAnswer}
           onChange={(e) => setUserAnswer(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="Type your answer here... Press Shift+Enter for a new line."
+          placeholder="Share your thoughts here 💭\n(Press Shift+Enter for new line, Enter to send)"
           disabled={answering}
           className="conversation-input"
+          aria-label="User answer input"
         />
         <button
           onClick={handleSubmitAnswer}
           disabled={answering || !userAnswer.trim()}
           className="btn-submit-answer"
+          title={answering ? "Checking your answer..." : "Submit your answer (or press Enter)"}
         >
-          {answering ? "Checking..." : "Send Answer"}
+          {answering ? (
+            <>
+              <span className="spinner-small"></span> Checking...
+            </>
+          ) : (
+            "Send 🚀"
+          )}
         </button>
       </div>
     </div>

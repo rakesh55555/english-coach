@@ -11,28 +11,28 @@ function getClient() {
   return client;
 }
 
-// Question templates based on difficulty level
+// Question templates based on difficulty level with Odia translations
 const QUESTION_TEMPLATES = {
   Beginner: [
-    "What is your name?",
-    "Where do you live?",
-    "What do you do for work?",
-    "What is your hobby?",
-    "How many siblings do you have?",
+    { en: "What is your name?", od: "ଆପଙ୍କ ନାମ କଣ?" },
+    { en: "Where do you live?", od: "ଆପଣ କେଉଁଠାରେ ରୁହନ୍ତି?" },
+    { en: "What do you do for work?", od: "ଆପଣ କାମ ପାଇଁ କଣ କରନ୍ତି?" },
+    { en: "What is your hobby?", od: "ଆପଙ୍କ ଶୌଖ କଣ?" },
+    { en: "How many siblings do you have?", od: "ଆପଙ୍କ କେତେ ଭାଇ ଓ ଭଉଣୀ ଅଛନ୍ତି?" },
   ],
   Basic: [
-    "Tell me about your favorite place to visit.",
-    "What did you do yesterday?",
-    "Why did you choose to learn English?",
-    "Describe your daily routine.",
-    "What would you like to achieve in the next year?",
+    { en: "Tell me about your favorite place to visit.", od: "ଆପଙ୍କ ପ୍ରିୟ ଯାତ୍ରା ସ୍ଥାନ ବିଷୟରେ କୁହୁଅ।" },
+    { en: "What did you do yesterday?", od: "ଗତ କାଲି ଆପଣ କଣ କରିଲେ?" },
+    { en: "Why did you choose to learn English?", od: "ଆପଣ ଇଂରାଜୀ ଶିଖିବାକୁ କାହିଁକି ବାଛିଲେ?" },
+    { en: "Describe your daily routine.", od: "ଆପଙ୍କ ଦୈନନ୍ଦିନ ଦିନ ବିବରଣ କରନ୍ତୁ।" },
+    { en: "What would you like to achieve in the next year?", od: "ଆଗାମୀ ବର୍ଷରେ ଆପଣ କଣ ହାସଲ କରିବେ ଚାହୁଁ?" },
   ],
   Intermediate: [
-    "How would you explain your job to someone who has never heard of it?",
-    "What are the pros and cons of social media?",
-    "If you could change one thing in the world, what would it be?",
-    "How do you think technology will change in 10 years?",
-    "What advice would you give to someone learning English?",
+    { en: "How would you explain your job to someone who has never heard of it?", od: "ଯିଏ ଏହା ଶୁଣି ନାହାଁନ୍ତି ତାହାକୁ ଆପଣ ନିଜର ଚାକିରୀ କିପରି ବୁଝାଇବେ?" },
+    { en: "What are the pros and cons of social media?", od: "ସୋସିଆଲ ମିଡିଆର ଗୁଣ ଓ ଦୋଷ କ'ଣ?" },
+    { en: "If you could change one thing in the world, what would it be?", od: "ଯଦି ଆପଣ ବିଶ୍ବରେ ଏକ ଜିନିଷ ବଦଳାଇ ପାରିବେ, ତେବେ ତାହା କଣ ହେବ?" },
+    { en: "How do you think technology will change in 10 years?", od: "ଆପଣ ଭାବନ୍ତି ୧୦ ବର୍ଷରେ ଟେକୋଲୋଜି କିପରି ବଦଳିବ?" },
+    { en: "What advice would you give to someone learning English?", od: "ଆପଣ ଇଂରାଜୀ ଶିଖୁଥିବା ବ୍ୟକ୍ତିକୁ କଣ ପରାମର୍ଶ ଦେବେ?" },
   ],
 };
 
@@ -101,23 +101,33 @@ export async function evaluateConversationAnswer(
 
     try {
       const parsed = JSON.parse(content);
+      
+      // Get next question (either from AI or from templates)
+      const nextQuestionText = parsed.followUp || null;
+      const nextQuestionObj = nextQuestionText ? 
+        { en: nextQuestionText, od: nextQuestionText } : 
+        generateQuestion(userLevel);
+      
       return {
         feedback: parsed.feedback || "Good effort!",
         corrections: parsed.corrections,
         explanation: parsed.explanation,
         explanationOdia: parsed.explanationOdia || parsed.explanation,
         score: parsed.score || 75,
-        followUp: parsed.followUp || generateQuestion(userLevel),
+        nextQuestion: nextQuestionObj.en,
+        nextQuestionOdia: nextQuestionObj.od,
       };
     } catch {
       // If JSON parsing fails, return structured response anyway
+      const fallbackQuestionObj = generateQuestion(userLevel);
       return {
         feedback: content.substring(0, 100),
         corrections: null,
         explanation: content.substring(100, 200),
         explanationOdia: "",
         score: 75,
-        followUp: generateQuestion(userLevel),
+        nextQuestion: fallbackQuestionObj.en,
+        nextQuestionOdia: fallbackQuestionObj.od,
       };
     }
   } catch (error) {
@@ -131,10 +141,11 @@ export async function evaluateConversationAnswer(
  */
 export async function getGreeting(userName, userLevel) {
   const greeting = `Hi Bubu! Let's learn English together! 🌟`;
-  const question = generateQuestion(userLevel);
+  const questionObj = generateQuestion(userLevel);
 
   return {
     greeting,
-    question,
+    question: questionObj.en,
+    questionOdia: questionObj.od,
   };
 }

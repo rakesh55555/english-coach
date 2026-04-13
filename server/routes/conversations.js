@@ -29,7 +29,7 @@ router.get("/start", async (req, res) => {
     }
 
     // Generate greeting and first question
-    const { greeting, question } = await getGreeting(
+    const { greeting, question, questionOdia } = await getGreeting(
       userStats.name,
       userStats.level
     );
@@ -37,6 +37,7 @@ router.get("/start", async (req, res) => {
     res.json({
       greeting,
       question,
+      questionOdia,
       userLevel: userStats.level,
       accuracy: userStats.accuracy,
     });
@@ -106,7 +107,8 @@ router.post("/answer", async (req, res) => {
       explanation: evaluation.explanation,
       explanationOdia: evaluation.explanationOdia || "",
       score: evaluation.score,
-      nextQuestion: evaluation.followUp,
+      nextQuestion: evaluation.nextQuestion,
+      nextQuestionOdia: evaluation.nextQuestionOdia || "",
       stats: {
         streak: safeStats.streak || 0,
         accuracy: safeStats.accuracy || evaluation.score,
