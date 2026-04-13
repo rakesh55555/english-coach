@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 
+const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+
 export default function ConversationMode() {
   const [greeting, setGreeting] = useState("");
   const [currentQuestion, setCurrentQuestion] = useState("");
@@ -26,7 +28,7 @@ export default function ConversationMode() {
         setError(null);
 
         const response = await fetch(
-          "http://localhost:5000/api/conversations/start?userId=gf_1"
+          `${API_BASE}/conversations/start?userId=gf_1`
         );
 
         if (!response.ok) {
@@ -60,7 +62,7 @@ export default function ConversationMode() {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/conversations/answer",
+        `${API_BASE}/conversations/answer`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
