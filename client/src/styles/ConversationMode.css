@@ -338,6 +338,7 @@
 }
 
 /* ─── Mobile Responsive ──────────────────────────────── */
+@media (max-width: 768px) {
   .conversation-page {
     height: 100vh;
   }
