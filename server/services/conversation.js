@@ -51,11 +51,13 @@ IMPORTANT: Respond in this EXACT JSON format (no markdown, no code blocks):
   "explanation": "Brief explanation of any mistakes",
   "explanationOdia": "Same explanation but written in Odia script (ଓଡ଼ିଆ)",
   "score": 80,
-  "followUp": "A natural follow-up question based on their answer"
+  "followUp": "A natural follow-up question based on their answer (in English)",
+  "followUpOdia": "Odia translation of the follow-up question (ଓଡ଼ିଆରେ)"
 }
 
 Keep explanations short and encouraging.
 Include both English and Odia explanations.
+Always provide followUp in English AND followUpOdia in Odia.
 Score from 0-100 (0-40: Beginner, 40-70: Basic, 70-100: Intermediate)`;
 
 /**
@@ -102,11 +104,26 @@ export async function evaluateConversationAnswer(
     try {
       const parsed = JSON.parse(content);
       
-      // Get next question (either from AI or from templates)
+      // Get next question: prefer AI-generated, fallback to templates
       const nextQuestionText = parsed.followUp || null;
-      const nextQuestionObj = nextQuestionText ? 
-        { en: nextQuestionText, od: nextQuestionText } : 
-        generateQuestion(userLevel);
+      const nextQuestionOdiaText = parsed.followUpOdia || null;
+      
+      let nextQuestion, nextQuestionOdia;
+      
+      if (nextQuestionText && nextQuestionOdiaText) {
+        // Use AI-generated question with both translations
+        nextQuestion = nextQuestionText;
+        nextQuestionOdia = nextQuestionOdiaText;
+      } else if (nextQuestionText) {
+        // AI gave English but no Odia - use English for both as fallback
+        nextQuestion = nextQuestionText;
+        nextQuestionOdia = nextQuestionText;
+      } else {
+        // No AI-generated follow-up, use template
+        const nextQuestionObj = generateQuestion(userLevel);
+        nextQuestion = nextQuestionObj.en;
+        nextQuestionOdia = nextQuestionObj.od;
+      }
       
       return {
         feedback: parsed.feedback || "Good effort!",
@@ -114,8 +131,8 @@ export async function evaluateConversationAnswer(
         explanation: parsed.explanation,
         explanationOdia: parsed.explanationOdia || parsed.explanation,
         score: parsed.score || 75,
-        nextQuestion: nextQuestionObj.en,
-        nextQuestionOdia: nextQuestionObj.od,
+        nextQuestion,
+        nextQuestionOdia,
       };
     } catch {
       // If JSON parsing fails, return structured response anyway

@@ -17,7 +17,7 @@ Rules:
 - Use very simple English
 - Always correct mistakes gently
 - Give short, clear explanations
-- Translate corrections to Odia
+- Provide Odia translation of explanations to help learning
 - Encourage the user warmly
 - Ask the next practice question
 
@@ -25,12 +25,12 @@ You MUST respond in this EXACT JSON format (no markdown, no code blocks):
 {
   "corrected": "The corrected English sentence",
   "explanation": "Brief explanation of the mistake",
-  "translation": "Odia translation of the corrected sentence",
+  "translation": "Odia translation of the explanation (not the corrected sentence)",
   "nextQuestion": "A new simple sentence for the user to try",
   "hadErrors": true
 }
 
-If the sentence is already correct, set hadErrors to false and still provide translation + next question.
+If the sentence is already correct, set hadErrors to false and still provide explanation translation + next question.
 Keep explanations under 2 sentences. Be warm and encouraging like a friend.`;
 
 export async function getAIResponse(userInput) {

@@ -153,7 +153,7 @@ export default function ChatBoxEnhanced({ onStatsUpdate }) {
 
                 {msg.translation && (
                   <div className="response-section translation">
-                    <div className="response-label">Odia Translation</div>
+                    <div className="response-label">ଓଡ଼ିଆ ଶିକ୍ଷା (Odia Explanation)</div>
                     <div className="response-text">{msg.translation}</div>
                   </div>
                 )}
